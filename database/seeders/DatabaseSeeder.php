@@ -2,9 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Analysis;
+use Database\Factories\AppointementAnalysisFactory;
+use Database\Factories\AppointementMedicamentFactory;
 use Illuminate\Database\Seeder;
+use App\Models\Patient;
+use App\Models\Appointment;
+use App\Models\Medicament;
+use App\Models\CompteRendu;
+use App\Models\Certificate;
+use App\Models\CaseDescription;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +21,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Create 50 patients
+        $patients = Patient::factory()->count(50)->create();
+        $analysis = Analysis::factory()->count(50)->create();
+        $appointments = Appointment::factory()->count(50)->create();
+        $medicaments = Medicament::factory()->count(50)->create();
+        $compteRendus = CompteRendu::factory()->count(50)->create();
+        $certificates = Certificate::factory()->count(50)->create();
+        $caseDescriptions = CaseDescription::factory()->count(50)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+
+        $appointments->each(function ($appointments) use ($medicaments) {
+            $appointments->medicaments()->attach(
+                $medicaments->random(rand(1, 3))->pluck('ID_Medicament')->toArray()
+            );
+        });
+
+        $appointments->each(function ($appointments) use ($analysis) {
+            $appointments->analyses()->attach(
+                $analysis->random(rand(1, 3))->pluck('ID_Analyse')->toArray()
+            );
+        });
+
+
+
+
     }
 }

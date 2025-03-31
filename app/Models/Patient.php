@@ -13,12 +13,14 @@ class Patient extends Model
 
     protected $fillable = ['name', 'birth_day', 'gender', 'CIN', 'phone_num', 'mutuelle','allergies','chronic_conditions'];
 
-    public function Appointment()
+
+
+    public function Appointment(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Appointment::class, 'ID_patient');
     }
 
-    public function certificats()
+    public function certificats(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(\Certificate::class, 'ID_patient');
     }

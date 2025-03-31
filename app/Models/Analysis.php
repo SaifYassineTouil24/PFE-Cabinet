@@ -1,10 +1,16 @@
 <?php
 
+namespace App\Models;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 class Analysis extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description'];
+    protected $primaryKey = 'ID_Analyse';
+    protected $table = 'analyses';
+
+    protected $fillable = ['type_analyse', 'departement'];
 
     public function appointments()
     {

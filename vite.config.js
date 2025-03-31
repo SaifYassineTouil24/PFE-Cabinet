@@ -10,4 +10,15 @@ export default defineConfig({
         }),
         tailwindcss(),
     ],
+    content: [
+        "./resources/**/*.blade.php",
+        "./resources/**/*.js",
+        "./resources/**/*.vue",
+        './resources/js/appointment-actions.js'  // Add this line
+
+    ],
+    theme: {
+        extend: {},
+    }
 });
+/** @type {import('tailwindcss').Config} */

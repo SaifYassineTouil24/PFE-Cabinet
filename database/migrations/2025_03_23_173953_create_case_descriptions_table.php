@@ -20,11 +20,9 @@ return new class extends Migration
             $table->float('blood_pressure');
             $table->float('tall');
             $table->float('spo2');
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->unsignedBigInteger('ID_RV');
             $table->foreign('ID_RV')->references('ID_RV')->on('appointments')->onDelete('cascade');
-
-
 
             $table->timestamps();
         });

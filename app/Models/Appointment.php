@@ -16,7 +16,7 @@ protected $primaryKey = 'ID_RV';
 
 
 
-public function patient()
+public function patient(): \Illuminate\Database\Eloquent\Relations\BelongsTo
 {
     return $this->belongsTo(Patient::class, 'ID_patient');
 }
